@@ -206,23 +206,22 @@ public class ImplementacionCalcu implements InterfazCalculadora{
         return resultadoEnInt;
         
     }
-
     @Override
     /** Metodo para realizar el proceso de decodificar
      * @param string a
      * @return string 
      */
 
-     public String decode(String a){
+    public String decode(String a){
          
         // Instancias
-        /** Se crean todas las instancias 
+        /**Se crean todas las instancias 
          * a utilizar
          */
         Scanner archivoLectura = new Scanner(System.in);
-        FactoryStack<int List> LineasTexto = new FactoryStack<StackVector>();
-        //FactoryStack<String> ReverseLines = new FactoryStack<String>();
-        //FactoryStack<String> ReversedData = new FactoryStack<String>();
+        FactoryStack<String> LineasTexto = new FactoryStacl<String>();
+        FactoryStack<String> ReverseLines = new FactoryStack<String>();
+        FactoryStack<String> ReversedData = new FactoryStack<String>();
         String resultadoLineas = "";
         int opsR = 0;
 
@@ -232,9 +231,9 @@ public class ImplementacionCalcu implements InterfazCalculadora{
          * un archivo, de forma correcta
          */
 
-         try{archivoLectura = new Scanner(new File(a));}
-         catch(FileNotFoundException e){
-            return("No se ha encontrado un archivo" + "\n Ingresa un archivo correcto: ");
+           try{archivoLectura = new Scanner(new File(a));}
+           catch(FileNotFoundException e){
+           return("No se ha encontrado un archivo" + "\n Ingresa un archivo correcto: ");
 
         }
 
@@ -246,18 +245,41 @@ public class ImplementacionCalcu implements InterfazCalculadora{
          * y agregarlas al stack con los procesos 
          * necesarios para efectuarlas
          */
-        while(archivoLectura.hasNext()){
+           while(archivoLectura.hasNext()){
             String fileLines = archivoLectura.next();
             LineasTexto.push(fileLines);
         }
 
-        while(!LineasTexto.empty()){
-            
+           while(!LineasTexto.empty()){
+           ReverseLines.push(LineasTexto.pop());
+
         }
-        
-        
-        
-    }
+
+           while(ReverseLines.size()>0){
+             String line = ReverseLines.pop();
+             FactoryStack<String> Dat = new FactoryStack<String>();
+             Scanner lineaS = new Scanner(line);
+
+           while(lineaS.hasNext()){
+               String datoCrack = lineaS.next();
+               Dat.push(datoCrack);
+           }
+           while(!Dat.empty()){
+               ReverseData.push(Dat.pop());
+
+             int result = operar(ReverseData);
+            opsR ++;
+            resultadoLineas = resultadosLineas + "Operacion#" + opsR + Integer.toString(result) + "\n\n";
+           }
+
+           return resultadoLineas;
+           
+
+        }        
+      
+    
+	}
+}
     
         
     
