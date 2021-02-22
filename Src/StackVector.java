@@ -12,54 +12,41 @@
 import java.util.Vector;
 
 /**
- * @author moise
+ * @author Alejandro Gomez
  *
  */
 public class StackVector<E> extends Stack<E> {
 
+
 	protected Vector<E> core;
-	protected int tail;
-	
-	public StackVector(int size) {
-		core = new Vector<E>(size);
-		tail = 0;
+	public StackVector(){
+		core = new Vector<E>();
 	}
 	
 	@Override
 	public boolean push(E element) {
-		if (this.count() < core.size()) {
-			tail++;
-			core.insertElementAt(element, tail);
-			return true;
-		} else {
-			return false;
-		}
+		core.add(element);
+		return true;
 	}
 
 	@Override
 	public E peek() {
-		return core.get(tail);
+		return (core.get(core.size()-1));
 	}
 
 	@Override
 	public E pop() {
-		if (this.isEmpty()) {
-			return null;
-		} else {
-			E temp = core.get(tail);
-			tail--;
-			return temp;
-		}
+		return (core.remove(core.size()-1));
 	}
 
 	@Override
 	public int count() {
-		return (tail + 1);
+		return core.size();
 	}
 
 	@Override
 	public boolean isEmpty() {
-		return (tail == -1);
+		return core.isEmpty();
 	}
 
 }

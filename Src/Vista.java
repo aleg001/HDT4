@@ -11,9 +11,31 @@
  * @author Alejandro Gomez
  * */
 
-
+import java.util.Scanner;
 public class Vista {
+    Scanner scan;
 
+
+    public Vista(){
+        scan = new Scanner(System.in);
+    }
+
+    public int MenuOp(){
+        int op = 2;
+        String ops = "";
+        boolean validar = true;
+        System.out.println("\n1. Usar calculadora");
+        System.out.println("2. Salir\n");
+        while(validar == true){
+            System.out.println("Ingrese su opcion:  ");
+            ops = scan.next();
+            op = validarNum(ops);
+            if(op != -1){
+                validar = false;
+            } else {}
+        } return op;
+        
+    }
     /**
      * Metodo de Bienvenida
      * @param n/a
@@ -22,9 +44,6 @@ public class Vista {
      **/
     public void Welcome(){
         System.out.println("\nBienvenido a la calculadora Infix-Postfix");
-        System.out.println("1. Usar calculadora");
-        System.out.println("2. Salir\n");
-        System.out.println("Ingrese su opcion:  ");
     }
 
     /**
@@ -33,12 +52,23 @@ public class Vista {
      * @author Alejandro Gomez
      * @return n/a
      **/
-    public void Options(){
+    public int Options(){
+        int op = 4;
+        String ops = "";
+        boolean validar = true;
         System.out.println("\nCual implementacion de Stack usara?");
         System.out.println("1. Vector");
         System.out.println("2. ArrayList");
-        System.out.println("3. List\n");
-        System.out.println("Ingrese su opcion:  ");
+        System.out.println("3. List");
+        System.out.println("4. Salir\n");
+        while(validar == true){
+            System.out.println("Ingrese su opcion:  ");
+            ops = scan.next();
+            op = validarNum(ops);
+            if(op != -1){
+                validar = false;
+            } else {}
+        } return op;
     }
 
 
@@ -78,4 +108,19 @@ public class Vista {
         System.out.println("2. Salir\n");
         System.out.println("Ingrese su opcion:  ");
     }
+
+
+    public int validarNum (String rawNumero) {
+        int numInt = -1;
+        try {
+            numInt = Integer.parseInt(rawNumero);
+        }
+        catch (NumberFormatException e)
+        {
+           System.out.println( "\nIngrese un numero valido porfa." );
+        }
+        
+        return numInt;
+      }
+
 }

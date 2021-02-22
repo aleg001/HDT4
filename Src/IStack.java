@@ -14,7 +14,7 @@
  */
 public interface IStack<E> {
 	
-	public boolean push(E element);
+	public boolean push(E item);
 	
 	public E peek();
 	
