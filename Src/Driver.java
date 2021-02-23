@@ -1,5 +1,5 @@
 /*******************************************************
-* Universidad del Valle de Gluatemala
+* Universidad del Valle de Guatemala
 * Algoritmos y Estructuras de Datos
 * Profesor: Moises Gonzales
 * Driver.java

@@ -13,6 +13,7 @@ import java.util.Vector;
 
 /**
  * @author Alejandro Gomez
+ * @author Moise
  *
  */
 public class StackVector<E> extends Stack<E> {

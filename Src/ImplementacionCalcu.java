@@ -206,79 +206,60 @@ public class ImplementacionCalcu implements InterfazCalculadora{
         return resultadoEnInt;
         
     }
+
+    public boolean setImplementationType(int ImplementationType){
+        switch (ImplementationType) {
+            case 1:
+            ImplementacionUsada = "Vector";
+                return true;
+            case 2:
+                ImplementacionUsada = "List";
+                return true;
+            case 3:
+                ImplementacionUsada = "ArrayList";
+                return true;
+        
+            default:
+                return false;
+        }
+    }
     @Override
     /** Metodo para realizar el proceso de decodificar
      * @param string a
-     * @return string 
+     * @return string
+     * @author Alejandro Gomez 
      */
 
     public String decode(String a){
-         
-        // Instancias
-        /**Se crean todas las instancias 
-         * a utilizar
-         */
-        Scanner archivoLectura = new Scanner(System.in);
-        FactoryStack<String> LineasTexto = new FactoryStacl<String>();
-        FactoryStack<String> ReverseLines = new FactoryStack<String>();
-        FactoryStack<String> ReversedData = new FactoryStack<String>();
-        String resultadoLineas = "";
-        int opsR = 0;
+        //Se crean instancias a utilizar 
+        OpDecoder od = new OpDecoder(); Scanner file = new Scanner(System.in);
+        Stack<String> linesInFile = sanFrancisco.getStackType(ImplementacionUsada); Stack<String> inverseLines = sanFrancisco.getStackType(ImplementacionUsada); 
+        String resultado = ""; int opMade = 0;
 
-        //** Progra defensiva */
-        
-        /**Se utiliza un trycatch para asegurarse de que exista
-         * un archivo, de forma correcta
-         */
+        //Se crea trycatch para la creacion del archivo
+        try {file = new Scanner(new File(file + ".txt"));} 
+        catch(FileNotFoundException e) {return("Archivo no encontrado");}   
+        file.useDelimiter("\n");
 
-           try{archivoLectura = new Scanner(new File(a));}
-           catch(FileNotFoundException e){
-           return("No se ha encontrado un archivo" + "\n Ingresa un archivo correcto: ");
+        //Se crea while para que por cada linea las agregue al stack
+        while(file.hasNext()){String nextBit = file.next(); linesInFile.push(nextBit);}
 
-        }
+        //Se crea un ciclo while para hacer un stack con los datos en inversa
+        while(!linesInFile.isEmpty()){inverseLines.push(linesInFile.pop());}
+        while(inverseLines.count()>0){
+            String linesInFileData = inverseLines.pop(); Stack<String> dataFromFile = sanFrancisco.getStackType(ImplementacionUsada);Scanner lineReader = new Scanner(linesInFileData);Stack<String> inverseDataLines = sanFrancisco.getStackType(ImplementacionUsada);
+            while(lineReader.hasNext()){String characterInLine = lineReader.next(); dataFromFile.push(characterInLine);}
+            while(!dataFromFile.isEmpty()){inverseDataLines.push(dataFromFile.pop());}
+            Stack<String> linesInPostFix = od.Translator(inverseDataLines);
+            int operationalResult = operar(linesInPostFix);
+            opMade++; resultado = resultado+"El resultado de las operaciones: "+opMade+" es "+Integer.toString(operationalResult)+"\n\n\n";
+        } return resultado;
 
-        
-        archivoLectura.useDelimiter("\n");
 
-        //Ciclos 
-        /** Se crea un ciclo para revisar el numero de lineas,
-         * y agregarlas al stack con los procesos 
-         * necesarios para efectuarlas
-         */
-           while(archivoLectura.hasNext()){
-            String fileLines = archivoLectura.next();
-            LineasTexto.push(fileLines);
-        }
 
-           while(!LineasTexto.empty()){
-           ReverseLines.push(LineasTexto.pop());
 
-        }
-
-           while(ReverseLines.size()>0){
-             String line = ReverseLines.pop();
-             FactoryStack<String> Dat = new FactoryStack<String>();
-             Scanner lineaS = new Scanner(line);
-
-           while(lineaS.hasNext()){
-               String datoCrack = lineaS.next();
-               Dat.push(datoCrack);
-           }
-           while(!Dat.empty()){
-               ReverseData.push(Dat.pop());
-
-             int result = operar(ReverseData);
-            opsR ++;
-            resultadoLineas = resultadosLineas + "Operacion#" + opsR + Integer.toString(result) + "\n\n";
-           }
-
-           return resultadoLineas;
-           
-
-        }        
-      
     
-	}
+}
 }
     
         

@@ -15,10 +15,23 @@ import java.util.Scanner;
 public class Vista {
     Scanner scan;
 
+    /**
+     * Metodo constructor
+     * @param n/a
+     * @author Alejandro Gomez
+     * @return n/a
+     **/
 
     public Vista(){
         scan = new Scanner(System.in);
     }
+
+    /**
+     * Metodo de opciones
+     * @param n/a
+     * @author Alejandro Gomez
+     * @return n/a
+     **/
 
     public int MenuOp(){
         int op = 2;
