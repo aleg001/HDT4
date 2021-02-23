@@ -40,7 +40,7 @@ public interface InterfazCalculadora
     Pre: 1 stack
     Post: resultados de stack
     */
-    public int operar(Stack x);
+    public int operar(IStack x);
     /* Pre: 1 string
     Post: 1 string con operaciones
     */

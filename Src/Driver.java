@@ -34,18 +34,18 @@ public class Driver {
                 if(opcionsubmenu == 1){
                     //Opcion Vector
                     verificar = Calculadora3000.setImplementationType(1);
-                    System.out.println(Calculadora3000.decode(archivo));
+                    System.out.print(Calculadora3000.decode(archivo));
                     
 
                 } else if (opcionsubmenu == 2){
                     //Opcion ArrayList
                     verificar = Calculadora3000.setImplementationType(3);
-                    System.out.println(Calculadora3000.decode(archivo));
+                    System.out.print(Calculadora3000.decode(archivo));
                 }
                 else if(opcionsubmenu == 3){
                     //Opcion List
                     verificar = Calculadora3000.setImplementationType(2);
-                    System.out.println(Calculadora3000.decode(archivo));
+                    System.out.print(Calculadora3000.decode(archivo));
 
                 }else if(opcionsubmenu == 4){
                     v.MensajeSalida();

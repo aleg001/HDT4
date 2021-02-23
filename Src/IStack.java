@@ -16,7 +16,7 @@ public interface IStack<E> {
 	
 	public boolean push(E item);
 	
-	public E peek();
+	public E peek(); 
 	
 	public E pop();
 	

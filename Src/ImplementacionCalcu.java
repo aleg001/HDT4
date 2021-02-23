@@ -80,7 +80,7 @@ public class ImplementacionCalcu implements InterfazCalculadora{
 
 
 
-    @Override
+   
     /** 
     *  Metodo operar
     * Brinda al usuario el resultado de las operaciones
@@ -88,13 +88,17 @@ public class ImplementacionCalcu implements InterfazCalculadora{
     * @return Devuelve los resultados
     * @author Alejandro Gomez
     */
-    public int operar(Stack info) {
+    @Override
+    public int operar(IStack info) {
         
         //En caso el stack ingresado es 0, devuelve 0 porque no hay operaciones
         if(info.count() == 0){return 0;}
         
         //Se define la instancia de stack a utilizar
         Stack<String> Operation =  sanFrancisco.getStackType(ImplementacionUsada);
+
+        System.out.println("Operaciones a realizar: ");
+        
         while(!info.isEmpty()) {
             String LastStackBit = info.pop().toString(); 
             int a; int b; int resultado;
@@ -154,7 +158,7 @@ public class ImplementacionCalcu implements InterfazCalculadora{
             case "9":
                 Operation.push(LastStackBit);
                 System.out.println("Felicidades!");
-                System.out.println("Agrego correctamente :"+LastStackBit+" al stack.");
+                System.out.println("Agrego correctamente :"+LastStackBit+" al stack."); 
                 break;
                 
             /**
@@ -166,8 +170,8 @@ public class ImplementacionCalcu implements InterfazCalculadora{
                 a = Integer.parseInt(Operation.pop());
                 b = Integer.parseInt(Operation.pop());
                 resultado = a*b;
-                System.out.println("Usted ingreso: ");
-                System.out.println("Numero 1: "+a);
+                System.out.println("Usted ingreso: "); 
+                System.out.println("Numero 1: "+a); 
                 System.out.println("*");
                 System.out.println("Numero 2: "+b);
                 System.out.println("Resultado: "+ resultado);
@@ -175,7 +179,9 @@ public class ImplementacionCalcu implements InterfazCalculadora{
                 break;
             
             case "+":
-                a = Integer.parseInt(Operation.pop());b = Integer.parseInt(Operation.pop());resultado = a+b;
+                a = Integer.parseInt(Operation.pop());
+                b = Integer.parseInt(Operation.pop());
+                resultado = a+b;
                 System.out.println("Usted ingreso: ");
                 System.out.println("Numero 1: "+a);
                 System.out.println("+");
@@ -207,7 +213,24 @@ public class ImplementacionCalcu implements InterfazCalculadora{
 
     }
         //Se brinda el resultado obtenido en cada operacion
+        //Operation.push("1"); Si esta funcionando las operaciones, si brindo un resultado
+        //System.out.println(Operation.pop()); No esta almacenando datos por eso da null, revisar operation push
+        
+        //Operation.push("1");
+        //Operation.push("+");
+        //Operation.push("2");
+        //Operation.push("*");
+        //Operation.push("9");
+
+        
+        
+        //Revisar interfaces, stacks, como se crean stacks, traductor de operaciones.
+        //Prints para cada metodo de las stacks
+        //Hacer debugging con cada una
+
         int resultadoEnInt = Integer.parseInt(Operation.pop());
+        //System.out.println(resultadoEnInt);
+
         return resultadoEnInt;
         
     }
@@ -242,18 +265,18 @@ public class ImplementacionCalcu implements InterfazCalculadora{
 
     public String decode(String a){
         //Se crean instancias a utilizar 
-        OpDecoder od = new OpDecoder(); Scanner archivoS = new Scanner(System.in);
-        Stack<String> linesInFile = sanFrancisco.getStackType(ImplementacionUsada); Stack<String> inverseLines = sanFrancisco.getStackType(ImplementacionUsada); 
+        OpDecoder od = new OpDecoder(); 
+        Scanner archivoS = new Scanner(System.in);
+        //Se crea trycatch para la creacion del archivo
+        try {archivoS = new Scanner(new File(a + ".txt"));} 
+        catch(FileNotFoundException e) {return("ERROR: Archivo no se encontro");}   
+        archivoS.useDelimiter("\n");
+        
+        Stack<String> linesInFile = sanFrancisco.getStackType(ImplementacionUsada); 
+        Stack<String> inverseLines = sanFrancisco.getStackType(ImplementacionUsada); 
         String resultado = ""; int opMade = 0;
 
-        //Se crea trycatch para la creacion del archivo
-        try {
-            archivoS = new Scanner(new File(a + ".txt"));
-        } 
-        catch(FileNotFoundException e) {
-            return("Archivo no encontrado");
-        }   
-        archivoS.useDelimiter("\n");
+
 
         //Se crea while para que por cada linea las agregue al stack
         while(archivoS.hasNext()){String nextBit = archivoS.next(); linesInFile.push(nextBit);}
@@ -274,6 +297,8 @@ public class ImplementacionCalcu implements InterfazCalculadora{
             
             //Se devuelve un resultado ya ordenado
             opMade++; resultado = resultado+"El resultado de las operaciones: "+opMade+" es "+Integer.toString(operationalResult)+"\n\n\n";
+            lineReader.close();
+            archivoS.close();
         } return resultado;
 
 
