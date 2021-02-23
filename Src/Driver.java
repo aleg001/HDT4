@@ -8,8 +8,6 @@
 * Ultima edicion: 19/02/2021
 ********************************************************/
 
-
-
 public class Driver {
     public static void main(String[] args){ 
         //Se declaran instancias y variables

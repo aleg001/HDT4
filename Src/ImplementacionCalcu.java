@@ -96,12 +96,18 @@ public class ImplementacionCalcu implements InterfazCalculadora{
         if(info.count() == 0){return 0;}
         
         //Se define la instancia de stack a utilizar
-        Stack<String> Operation =  sanFrancisco.getStackType(ImplementacionUsada);
+        Stack<String> Operation =  sanFrancisco.getStackType(ImplementacionUsada); Stack<String> line = new StackVector<String>();
         System.out.println("Operaciones a realizar: ");
         
-        while(!info.isEmpty()) {
-            System.out.println("ERROR 404");
-            String LastStackBit = (String) info.pop();
+    
+
+        String[] infoArray = info.pop().toString().split("");
+        for (int i = (infoArray.length - 1); i > -1;i--){
+            line.push(infoArray[i]);
+        }
+
+        while(!line.isEmpty()) {
+            String LastStackBit = (String) line.pop();
             //.toString(); 
             int a; int b; int resultado;
         
