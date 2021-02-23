@@ -17,6 +17,9 @@ public class ImplementacionCalcu implements InterfazCalculadora{
     private FactoryStack sanFrancisco = new FactoryStack();
     private String ImplementacionUsada = "";
     
+
+    private ImplementacionCalcu(){};
+    public static ImplementacionCalcu getC(){return Calculadora;}
     @Override
     /**
      * Devuelve la suma de dos números
@@ -92,7 +95,9 @@ public class ImplementacionCalcu implements InterfazCalculadora{
         
         //Se define la instancia de stack a utilizar
         Stack<String> Operation =  sanFrancisco.getStackType(ImplementacionUsada);
-        while(!info.isEmpty()){String LastStackBit = info.pop().toString(); int a; int b; int resultado;
+        while(!info.isEmpty()) {
+            String LastStackBit = info.pop().toString(); 
+            int a; int b; int resultado;
         
         switch (LastStackBit){
             
@@ -237,23 +242,28 @@ public class ImplementacionCalcu implements InterfazCalculadora{
 
     public String decode(String a){
         //Se crean instancias a utilizar 
-        OpDecoder od = new OpDecoder(); Scanner file = new Scanner(System.in);
+        OpDecoder od = new OpDecoder(); Scanner archivoS = new Scanner(System.in);
         Stack<String> linesInFile = sanFrancisco.getStackType(ImplementacionUsada); Stack<String> inverseLines = sanFrancisco.getStackType(ImplementacionUsada); 
         String resultado = ""; int opMade = 0;
 
         //Se crea trycatch para la creacion del archivo
-        try {file = new Scanner(new File(file + ".txt"));} 
-        catch(FileNotFoundException e) {return("Archivo no encontrado");}   
-        file.useDelimiter("\n");
+        try {
+            archivoS = new Scanner(new File(a + ".txt"));
+        } 
+        catch(FileNotFoundException e) {
+            return("Archivo no encontrado");
+        }   
+        archivoS.useDelimiter("\n");
 
         //Se crea while para que por cada linea las agregue al stack
-        while(file.hasNext()){String nextBit = file.next(); linesInFile.push(nextBit);}
+        while(archivoS.hasNext()){String nextBit = archivoS.next(); linesInFile.push(nextBit);}
 
         //Se crea un ciclo while para hacer un stack con los datos en inversa
         while(!linesInFile.isEmpty()){inverseLines.push(linesInFile.pop());}
 
         //Se crea ciclo while para verificar en las lineas inversas el conteo
         while(inverseLines.count()>0){
+            
             String linesInFileData = inverseLines.pop(); Stack<String> dataFromFile = sanFrancisco.getStackType(ImplementacionUsada);Scanner lineReader = new Scanner(linesInFileData);Stack<String> inverseDataLines = sanFrancisco.getStackType(ImplementacionUsada);
             while(lineReader.hasNext()){String characterInLine = lineReader.next(); dataFromFile.push(characterInLine);}
             while(!dataFromFile.isEmpty()){inverseDataLines.push(dataFromFile.pop());}
@@ -261,6 +271,7 @@ public class ImplementacionCalcu implements InterfazCalculadora{
 
             //Se crea un integer con los resultados de la calculadora
             int operationalResult = operar(linesInPostFix);
+            
             //Se devuelve un resultado ya ordenado
             opMade++; resultado = resultado+"El resultado de las operaciones: "+opMade+" es "+Integer.toString(operationalResult)+"\n\n\n";
         } return resultado;

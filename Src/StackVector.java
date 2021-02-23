@@ -17,37 +17,45 @@ import java.util.Vector;
  *
  */
 public class StackVector<E> extends Stack<E> {
+    private Vector<E> xd;
 
 
-	protected Vector<E> core;
-	public StackVector(){
-		core = new Vector<E>();
-	}
-	
-	@Override
-	public boolean push(E element) {
-		core.add(element);
-		return true;
-	}
+    public StackVector() {
+        xd = new Vector<E>();
+    }
 
-	@Override
-	public E peek() {
-		return (core.get(core.size()-1));
-	}
 
-	@Override
-	public E pop() {
-		return (core.remove(core.size()-1));
-	}
+    @Override
+    public boolean push(E item) {
+        xd.add(item);
+        return true;     
+    }
 
-	@Override
-	public int count() {
-		return core.size();
-	}
 
-	@Override
-	public boolean isEmpty() {
-		return core.isEmpty();
-	}
 
+    @Override
+    public E peek() {
+        return(xd.get(xd.size() - 1));
+    }
+
+
+    @Override
+    public boolean isEmpty() {
+        return xd.isEmpty();
+    }
+
+
+    @Override
+    public int count() {
+        return xd.size();
+    }
+
+
+
+    @Override
+    public E pop() {
+        E obj = null;
+        if (xd.isEmpty()==false){obj=(xd.remove(xd.size() - 1));}
+        return obj;
+    }
 }

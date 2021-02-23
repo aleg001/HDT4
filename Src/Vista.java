@@ -12,6 +12,8 @@
  * */
 
 import java.util.Scanner;
+
+
 public class Vista {
     Scanner scan;
 
@@ -49,6 +51,15 @@ public class Vista {
         } return op;
         
     }
+
+    public void FileName(){
+        System.out.println("Ingrese el nombre del archivo que desea leer (.txt) soalmente");
+    }
+
+    public String Archivo(){
+        return scan.next();
+    }
+
     /**
      * Metodo de Bienvenida
      * @param n/a
@@ -122,6 +133,7 @@ public class Vista {
         System.out.println("Ingrese su opcion:  ");
     }
 
+  
 
     public int validarNum (String rawNumero) {
         int numInt = -1;
@@ -135,5 +147,15 @@ public class Vista {
         
         return numInt;
       }
+
+      
+    public void MensajeSalida(){
+        System.out.println("Gracias por usar nuestra calculadora!");
+        System.out.println("Feliz dia!!!!!!!");
+    }
+
+    public void LectorArchivo(String name){
+        System.out.println("Leyendo el archivo... "+name+".txt");
+    }
 
 }

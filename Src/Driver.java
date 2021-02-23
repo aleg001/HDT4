@@ -13,39 +13,46 @@
 public class Driver {
     public static void main(String[] args){ 
         //Se declaran instancias y variables
+        ImplementacionCalcu Calculadora3000 = ImplementacionCalcu.getC();
         Vista v = new Vista();
-        boolean salir = false;
-        int opcion = 0; int opcionsubmenu = 0;
+        boolean salir = false; boolean verificar = false;
+        int opcion = 0; int opcionsubmenu = 0; 
 
         v.Welcome();
          
         while (salir == false){
             opcion = v.MenuOp();
             v.FileName();
-            String file = v.Archivo();
-            v.LectorArchivo(file);
-            
+            String archivo = v.Archivo();
+            v.LectorArchivo(archivo);
+            //Lector de archivo
+
             if(opcion == 1){
                 opcionsubmenu = v.Options();
+                //El usuario ingresa que tipo de stack quiere usar
+
                 if(opcionsubmenu == 1){
                     //Opcion Vector
-                    System.out.println("xdxdxd");
-                }
-                if(opcionsubmenu == 2){
+                    verificar = Calculadora3000.setImplementationType(1);
+                    System.out.println(Calculadora3000.decode(archivo));
+                    
+
+                } else if (opcionsubmenu == 2){
                     //Opcion ArrayList
-                    //aki ay dos subopsiones
-                    System.out.println("xdxdxd");
+                    verificar = Calculadora3000.setImplementationType(3);
+                    System.out.println(Calculadora3000.decode(archivo));
                 }
-                if(opcionsubmenu == 3){
+                else if(opcionsubmenu == 3){
                     //Opcion List
-                    System.out.println("xdxdxd");
-                }
-                if(opcionsubmenu == 4){
-                    //Salir
+                    verificar = Calculadora3000.setImplementationType(2);
+                    System.out.println(Calculadora3000.decode(archivo));
+
+                }else if(opcionsubmenu == 4){
+                    v.MensajeSalida();
                     salir = true;
                 }
             }
-            if (opcion ==2){
+            else if (opcion ==2){
                 v.MensajeSalida();
                 salir = true;
             }
