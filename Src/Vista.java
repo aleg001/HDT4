@@ -51,6 +51,10 @@ public class Vista {
         } return op;
         
     }
+    public void OperationalResultInString(String x){
+        System.out.println(x);
+    }
+
 
     public void FileName(){
         System.out.println("Ingrese el nombre del archivo que desea leer (.txt) soalmente");

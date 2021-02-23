@@ -13,18 +13,19 @@ import java.io.File;
 
 public class ImplementacionCalcu implements InterfazCalculadora{
 
+    //Se crean instancias a utilizar
     private static ImplementacionCalcu Calculadora = new ImplementacionCalcu(); 
-    private FactoryStack sanFrancisco = new FactoryStack();
-    private String ImplementacionUsada = "";
+    private FactoryStack sanFrancisco = new FactoryStack(); private String ImplementacionUsada = "";
     
-
+    //USO DE SINGELNTON
     private ImplementacionCalcu(){};
     public static ImplementacionCalcu getC(){return Calculadora;}
+
     @Override
     /**
      * Devuelve la suma de dos números
-     * @param x valor 1 que se suma 
-     * @param y valor 2 que se suma
+     * @param x valor que se suma 
+     * @param y valor que se suma
      * @return Resultado de suma x+y
      * @author Alejandro Gomez
      */
@@ -96,11 +97,12 @@ public class ImplementacionCalcu implements InterfazCalculadora{
         
         //Se define la instancia de stack a utilizar
         Stack<String> Operation =  sanFrancisco.getStackType(ImplementacionUsada);
-
         System.out.println("Operaciones a realizar: ");
         
         while(!info.isEmpty()) {
-            String LastStackBit = info.pop().toString(); 
+            System.out.println("ERROR 404");
+            String LastStackBit = (String) info.pop();
+            //.toString(); 
             int a; int b; int resultado;
         
         switch (LastStackBit){
@@ -167,8 +169,7 @@ public class ImplementacionCalcu implements InterfazCalculadora{
             *   el valor ingresado
             **/
             case "*":
-                a = Integer.parseInt(Operation.pop());
-                b = Integer.parseInt(Operation.pop());
+                a = Integer.parseInt(Operation.pop());b = Integer.parseInt(Operation.pop());
                 resultado = a*b;
                 System.out.println("Usted ingreso: "); 
                 System.out.println("Numero 1: "+a); 
@@ -179,8 +180,7 @@ public class ImplementacionCalcu implements InterfazCalculadora{
                 break;
             
             case "+":
-                a = Integer.parseInt(Operation.pop());
-                b = Integer.parseInt(Operation.pop());
+                a = Integer.parseInt(Operation.pop());b = Integer.parseInt(Operation.pop());
                 resultado = a+b;
                 System.out.println("Usted ingreso: ");
                 System.out.println("Numero 1: "+a);
@@ -227,35 +227,18 @@ public class ImplementacionCalcu implements InterfazCalculadora{
         //Revisar interfaces, stacks, como se crean stacks, traductor de operaciones.
         //Prints para cada metodo de las stacks
         //Hacer debugging con cada una
+    
 
+        //LINEA QUE MARCA ERROR
         int resultadoEnInt = Integer.parseInt(Operation.pop());
+        
         //System.out.println(resultadoEnInt);
 
         return resultadoEnInt;
         
     }
 
-    /** Metodo para brindar la implementacion a utilizar
-     * @param Int imptype
-     * @return boolean
-     * @author Alejandro Gomez 
-     */
-    public boolean setImplementationType(int ImplementationType){
-        switch (ImplementationType) {
-            case 1:
-                ImplementacionUsada = "Vector";
-                return true;
-            case 2:
-                ImplementacionUsada = "List";
-                return true;
-            case 3:
-                ImplementacionUsada = "ArrayList";
-                return true;
-        
-            default:
-                return false;
-        }
-    }
+
     @Override
     /** Metodo para realizar el proceso de decodificar
      * @param string a
@@ -264,12 +247,13 @@ public class ImplementacionCalcu implements InterfazCalculadora{
      */
 
     public String decode(String a){
+        
         //Se crean instancias a utilizar 
-        OpDecoder od = new OpDecoder(); 
-        Scanner archivoS = new Scanner(System.in);
+        OpDecoder od = new OpDecoder(); Scanner archivoS = new Scanner(System.in);
         //Se crea trycatch para la creacion del archivo
         try {archivoS = new Scanner(new File(a + ".txt"));} 
         catch(FileNotFoundException e) {return("ERROR: Archivo no se encontro");}   
+        
         archivoS.useDelimiter("\n");
         
         Stack<String> linesInFile = sanFrancisco.getStackType(ImplementacionUsada); 
@@ -286,26 +270,55 @@ public class ImplementacionCalcu implements InterfazCalculadora{
 
         //Se crea ciclo while para verificar en las lineas inversas el conteo
         while(inverseLines.count()>0){
+            String linesInFileData = inverseLines.pop(); 
+            Stack<String> info = sanFrancisco.getStackType(ImplementacionUsada);
+            Scanner lineReader = new Scanner(linesInFileData);
+
             
-            String linesInFileData = inverseLines.pop(); Stack<String> dataFromFile = sanFrancisco.getStackType(ImplementacionUsada);Scanner lineReader = new Scanner(linesInFileData);Stack<String> inverseDataLines = sanFrancisco.getStackType(ImplementacionUsada);
-            while(lineReader.hasNext()){String characterInLine = lineReader.next(); dataFromFile.push(characterInLine);}
-            while(!dataFromFile.isEmpty()){inverseDataLines.push(dataFromFile.pop());}
+            while(lineReader.hasNext()){
+                String characterInLine = lineReader.next(); info.push(characterInLine);}
+                Stack<String> inverseDataLines = sanFrancisco.getStackType(ImplementacionUsada);
+                while(!info.isEmpty()){
+                    inverseDataLines.push(info.pop());}
+
             Stack<String> linesInPostFix = od.Translator(inverseDataLines);
 
             //Se crea un integer con los resultados de la calculadora
+            
+            //LINEA QUE MARCA ERROR
             int operationalResult = operar(linesInPostFix);
             
             //Se devuelve un resultado ya ordenado
-            opMade++; resultado = resultado+"El resultado de las operaciones: "+opMade+" es "+Integer.toString(operationalResult)+"\n\n\n";
-            lineReader.close();
-            archivoS.close();
-        } return resultado;
-
-
-
-
+            opMade++; resultado = resultado+"El resultado de las operaciones: "+opMade+" es "+Integer.toString(operationalResult)+"\n\n\n";lineReader.close();archivoS.close();
+        } 
+        return "el resultado es: "+resultado;
     
-}
+    }
+
+    /** Metodo para brindar la implementacion a utilizar
+     * @param Int imptype
+     * @return boolean
+     * @author Alejandro Gomez 
+     */
+
+    @Override
+    public boolean setImplementationType(int ImplementationType){
+        switch (ImplementationType) {
+            case 1:
+                ImplementacionUsada = "Vector";
+                return true;
+            case 2:
+                ImplementacionUsada = "List";
+                return true;
+            case 3:
+                ImplementacionUsada = "ArrayList";
+                return true;
+        
+            default:
+                return false;
+        }
+    }
+
 }
     
         

@@ -35,9 +35,7 @@ public class OpDecoder {
             String DataFromStack = info.pop();
 
             //If it has more values than 0, it goes to the while loop.
-            if(OpHierarchy(DataFromStack)>0){
-                while(!Stacker.isEmpty() && OpHierarchy(Stacker.peek())>=OpHierarchy(DataFromStack)){ 
-                    StackR.push(Stacker.pop());
+            if(OpHierarchy(DataFromStack)>0){while(!Stacker.isEmpty() && OpHierarchy(Stacker.peek())>=OpHierarchy(DataFromStack)){StackR.push(Stacker.pop());
             }Stacker.push(DataFromStack);}
 
             //If it has ) or (, it goes through these conditions.

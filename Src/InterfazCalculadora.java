@@ -45,5 +45,7 @@ public interface InterfazCalculadora
     Post: 1 string con operaciones
     */
     public String decode(String a);
+ 
+    public boolean setImplementationType(int ImplementationType);
 
      }
