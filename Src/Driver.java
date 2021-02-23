@@ -21,6 +21,10 @@ public class Driver {
          
         while (salir == false){
             opcion = v.MenuOp();
+            v.FileName();
+            String file = v.Archivo();
+            v.LectorArchivo(file);
+            
             if(opcion == 1){
                 opcionsubmenu = v.Options();
                 if(opcionsubmenu == 1){
@@ -42,7 +46,7 @@ public class Driver {
                 }
             }
             if (opcion ==2){
-                
+                v.MensajeSalida();
                 salir = true;
             }
 
