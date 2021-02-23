@@ -17,8 +17,6 @@ public class Driver {
         boolean salir = false;
         int opcion = 0; int opcionsubmenu = 0;
 
-        //LLamar a calculadora singlenton xd
-
         v.Welcome();
          
         while (salir == false){
@@ -31,6 +29,7 @@ public class Driver {
                 }
                 if(opcionsubmenu == 2){
                     //Opcion ArrayList
+                    //aki ay dos subopsiones
                     System.out.println("xdxdxd");
                 }
                 if(opcionsubmenu == 3){

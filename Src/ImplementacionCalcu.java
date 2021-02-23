@@ -207,10 +207,15 @@ public class ImplementacionCalcu implements InterfazCalculadora{
         
     }
 
+    /** Metodo para brindar la implementacion a utilizar
+     * @param Int imptype
+     * @return boolean
+     * @author Alejandro Gomez 
+     */
     public boolean setImplementationType(int ImplementationType){
         switch (ImplementationType) {
             case 1:
-            ImplementacionUsada = "Vector";
+                ImplementacionUsada = "Vector";
                 return true;
             case 2:
                 ImplementacionUsada = "List";
@@ -246,12 +251,17 @@ public class ImplementacionCalcu implements InterfazCalculadora{
 
         //Se crea un ciclo while para hacer un stack con los datos en inversa
         while(!linesInFile.isEmpty()){inverseLines.push(linesInFile.pop());}
+
+        //Se crea ciclo while para verificar en las lineas inversas el conteo
         while(inverseLines.count()>0){
             String linesInFileData = inverseLines.pop(); Stack<String> dataFromFile = sanFrancisco.getStackType(ImplementacionUsada);Scanner lineReader = new Scanner(linesInFileData);Stack<String> inverseDataLines = sanFrancisco.getStackType(ImplementacionUsada);
             while(lineReader.hasNext()){String characterInLine = lineReader.next(); dataFromFile.push(characterInLine);}
             while(!dataFromFile.isEmpty()){inverseDataLines.push(dataFromFile.pop());}
             Stack<String> linesInPostFix = od.Translator(inverseDataLines);
+
+            //Se crea un integer con los resultados de la calculadora
             int operationalResult = operar(linesInPostFix);
+            //Se devuelve un resultado ya ordenado
             opMade++; resultado = resultado+"El resultado de las operaciones: "+opMade+" es "+Integer.toString(operationalResult)+"\n\n\n";
         } return resultado;
 
